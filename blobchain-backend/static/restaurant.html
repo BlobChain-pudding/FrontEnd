@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blobchain</title>
+  </head>
+  <body>
+    <h1>Blobchain</h1>
+    <div id="firebaseui-auth-container"></div>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
+    <script src="./dist/web3.min.js"></script>
+    <script type="module" src="./restaurant.js"></script>
+    <button id="newUserBtn">newUser</button>
+    <button id="existingUserBtn">existingUser</button>
+    <button id="addSlotBtn">addSlot</button>
+    <button id="getRequestsBtn">getRequests</button>
+    <button id="rejRequestBtn">rejRequest</button>
+    <button id="accRequestBtn">accRequest</button>
+    <button id="getAcceptedSlotsBtn">getAcceptedSlots</button>
+    <button id="confirmVisitBtn">confirmVisit</button>
+  </body>
+</html>

@@ -5,7 +5,16 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class User extends Component {
-   
+    constructor(props){
+        super(props);
+        this.goBack = this.goBack.bind(this); // i think you are missing this
+     }
+     
+     goBack(){
+         this.props.history.goBack();
+     }
+     
+    
     render(){
     return (
         <div>
@@ -31,7 +40,7 @@ class User extends Component {
                        My Requests
                    </div>
                </Link>
-               <button className="buttonSignOut">
+               <button className="buttonSignOut" onClick={this.goBack}>
                    SignOut
                </button>
            </div>
@@ -44,7 +53,7 @@ class User extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        name: state.getUserDataReducer.displayName,
+        name: state.getUserDataReducer.user.displayName,
         success:state.getUserDataReducer.success,
     }
 }

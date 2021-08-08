@@ -6,7 +6,15 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Restaurant extends Component {
-
+    constructor(props){
+        super(props);
+        this.goBack = this.goBack.bind(this); // i think you are missing this
+     }
+     
+     goBack(){
+         this.props.history.goBack();
+     }
+     
     render(){
     return (
         <div>
@@ -32,7 +40,7 @@ class Restaurant extends Component {
                          Check Reservations
                      </div>
                  </Link>
-                 <button className="buttonSignOut">
+                 <button className="buttonSignOut" onClick={this.goBack}>
                      SignOut
                  </button>
              </div>
@@ -45,7 +53,7 @@ class Restaurant extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        name: state.getUserDataReducer.displayName,
+        name: state.getUserDataReducer.user.displayName,
         success:state.getUserDataReducer.success,
     }
 }

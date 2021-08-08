@@ -10,6 +10,7 @@ class Search extends Component {
         super(props);
         this.props.dispatch(getRestaurants());
         this.onSearchValueChange = this.onSearchValueChange.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
     state = {
         restaurantSearch:"",
@@ -18,12 +19,17 @@ class Search extends Component {
         this.setState({
             restaurantSearch: e.target.value});
     }
+    goBack(){
+        this.props.history.goBack();
+    }
+    
     render(){
         
     return (
         <div>
             
             <div>
+            <button onClick={this.goBack}>Go Back</button>
             <input placeholder="Restaurant Search" value={this.state.restaurantSearch} type="text" onChange={(e)=>this.onSearchValueChange(e)}></input>
             <div className="RestaurantList">
             {this.props.restaurants ? this.props.restaurants.map((res)=>{
@@ -51,8 +57,8 @@ class Search extends Component {
 const mapStateToProps = (state) => {
     
     return{
-        name: state.getUserDataReducer.displayName,
-        uid: state.getUserDataReducer.uid,
+        name: state.getUserDataReducer.user.displayName,
+        UID: state.getUserDataReducer.user.uid,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
         restaurants: state.getRestaurantsReducer.restaurants,

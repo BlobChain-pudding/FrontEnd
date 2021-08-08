@@ -17,6 +17,7 @@ import {
   import { postData } from "./requests.js";
   import firebase from '../firebase';
   const apiNewUser = async (email, password, name, isRestaurant) => {
+    console.log(email, password, name, isRestaurant);
     const credential = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
@@ -43,6 +44,7 @@ import {
     await postData("http://localhost:3000/sig", data);
     if (isRestaurant) await registerRestaurant(user.displayName);
     else await registerUser(user.displayName);
+    return user;
   };
 
   

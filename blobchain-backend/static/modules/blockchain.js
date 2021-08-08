@@ -1,6 +1,4 @@
-import { contractAbi } from "./abis";
-import Web3 from 'web3';
-const ethereum  = window.ethereum;
+import { contractAbi } from "./abis.js";
 
 const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 
@@ -17,7 +15,7 @@ if (!window.ethereum) {
   console.error("Please install MetaMask!");
 }
 
-const connectBlob = async () => {
+const connect = async () => {
   try {
     const accounts = await ethereum.request({ method: "eth_requestAccounts" });
     return accounts[0];
@@ -33,7 +31,7 @@ const connectBlob = async () => {
 };
 
 const personalSign = async (nonce) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((res, rej) => {
     web3.eth.personal
       .sign(nonce, currentAccount, (err, result) => {
@@ -84,7 +82,7 @@ const getRestaurant = async (address) => {
 };
 
 const registerUser = async (name) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((resolve, reject) => {
     contract.methods
       .registerUser(name)
@@ -99,7 +97,7 @@ const registerUser = async (name) => {
 };
 
 const registerRestaurant = async (name) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((resolve, reject) => {
     contract.methods
       .registerRestaurant(name)
@@ -114,10 +112,10 @@ const registerRestaurant = async (name) => {
 };
 
 const createSlot = async (date, table, pax) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((resolve, reject) => {
     contract.methods
-      .createReservation(date, table, pax)
+      .createReservation(date.getTime(), table, pax)
       .send({ from: currentAccount }, (err, res) => {
         if (err) reject(new Error("failed to create reservation slot"));
         else resolve(res);
@@ -220,7 +218,7 @@ const getUserSlots = async (address, type) => {
 };
 
 const acceptRequest = async (slotHash, address) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((resolve, reject) => {
     contract.methods
       .acceptReservation(slotHash, address)
@@ -235,7 +233,7 @@ const acceptRequest = async (slotHash, address) => {
 };
 
 const visitedRestaurant = async (slotHash, address) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((resolve, reject) => {
     contract.methods
       .visitedRestaurant(slotHash, address)
@@ -250,7 +248,7 @@ const visitedRestaurant = async (slotHash, address) => {
 };
 
 const postReview = async (content, author, slotHash) => {
-  const currentAccount = await connectBlob();
+  const currentAccount = await connect();
   return new Promise((resolve, reject) => {
     contract.methods
       .postReview(content, author, slotHash)
@@ -296,7 +294,7 @@ const getReviews = async (address) => {
 
 export {
   personalSign,
-  connectBlob,
+  connect,
   registerUser,
   registerRestaurant,
   getUser,

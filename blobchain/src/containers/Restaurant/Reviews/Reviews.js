@@ -22,7 +22,7 @@ class Reviews extends Component {
             {
                 this.props.reviews ? (Object.keys(this.props.reviews).map((date)=>{
                     if(date!=="success"){
-                        return <div className="ReviewsList">
+                        return <div className="ReviewsList" key={date}>
                             <div className="ReviewDate">{date}</div>
                             {(this.props.reviews[date].map((review,i)=>{
                             return <div key={i} className="singleReview">
@@ -47,7 +47,7 @@ class Reviews extends Component {
 const mapStateToProps = (state) => {
     
     return{
-        name: state.getUserDataReducer.displayName,
+        name: state.getUserDataReducer.user.displayName,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
         reviews:state.getReviewsReducer.reviews,

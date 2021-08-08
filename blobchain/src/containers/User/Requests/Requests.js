@@ -7,6 +7,7 @@ class Requests extends Component {
     
     constructor(props){
         super(props);
+        this.goBack = this.goBack.bind(this); 
         this.props.dispatch(getRequests(props.UID,props.type));
     }
 
@@ -25,9 +26,14 @@ class Requests extends Component {
         return unixDate.toLocaleString('en-SG', {timeZone: 'Asia/Singapore',year: 'numeric', month: 'long', day: 'numeric', hour:"2-digit", minute:"numeric", hour12: true });    
      }
 
+    goBack(){
+        this.props.history.goBack();
+    }
+
     render(){
     return (
         <div>
+            <button onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.name}</div>
             <br></br>
             {
@@ -60,11 +66,11 @@ class Requests extends Component {
 const mapStateToProps = (state) => {
     
     return{
-        name: state.getUserDataReducer.displayName,
-        UID:state.getUserDataReducer.uid,
+        name: state.getUserDataReducer.user.displayName,
+        UID:state.getUserDataReducer.user.uid,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
-        requests:state.getRequestsReducer,
+        requests:state.getRequestsReducer.requests,
     }
 }
 

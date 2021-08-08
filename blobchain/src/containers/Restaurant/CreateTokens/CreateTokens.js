@@ -4,6 +4,7 @@ import { connect  } from 'react-redux';
 import { Component } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import ReactDatePicker from 'react-datepicker';
+import { postCreateTokens } from '../../../store/actions';
 class CreateTokens extends Component {
     constructor(props){
         super(props);
@@ -11,11 +12,16 @@ class CreateTokens extends Component {
         this.handlePaxChange = this.handlePaxChange.bind(this);
         this.handleTableNumChange = this.handleTableNumChange.bind(this);
         this.createTokenHandler = this.createTokenHandler.bind(this);
+        this.goBack = this.goBack.bind(this)
     }
     handleChange = (e) =>{
         this.setState({
             startDate: e,
         })
+    }
+
+    goBack(){
+        this.props.history.goBack();
     }
 
     handleTableNumChange = (e) =>{
@@ -50,12 +56,14 @@ class CreateTokens extends Component {
     createTokenHandler = () => {
        if(this.state.startDate && this.state.pax && this.state.tableNum){
         var unixTime = this.state.startDate.getTime();
+        this.props.dispatch(postCreateTokens(unixTime,this.state.tableNum, this.state.pax))
        }
     }
 
     render(){
     return (
         <div>
+            <button onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.name}</div>
             <br></br>
             <div className="chooseDateTitle">Choose Date:</div>
@@ -86,7 +94,7 @@ class CreateTokens extends Component {
 const mapStateToProps = (state) => {
     
     return{
-        name: state.getUserDataReducer.displayName,
+        name: state.getUserDataReducer.user.displayName,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
         reviews:state.getReviewsReducer.reviews,

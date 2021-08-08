@@ -14,3 +14,14 @@
     padding: 0.5vh 1vh;
     border-radius: 1vh;
 }
+
+.ConfirmVisit{
+    margin: 1vh 0;
+    border: 0;
+    font-size: 2vh;
+    font-family: "MADETOMMYBOLD";
+    background-color: #6A957B;
+    color:white;
+    padding: 0.5vh 1vh;
+    border-radius: 1vh;
+}

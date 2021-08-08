@@ -11,6 +11,7 @@
     font-family: "MADETOMMY";
 }
 .Token{
+    margin:1vh 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -4,18 +4,24 @@ import { connect  } from 'react-redux';
 import { Component } from 'react';
 import { getSlots } from '../../../store/actions';
 import { connectBlob } from '../../../modules/blockchain';
+import { confirmVisit } from './../../../store/actions/restaurantActions';
 class RestaurantReservations extends Component {
     
     constructor(props){
         super(props);
+        this.goBack = this.goBack.bind(this); 
         connectBlob().then((currentAccount)=>{
-            this.props.dispatch(getSlots(currentAccount,true));
+            this.props.dispatch(getSlots(currentAccount,"accepted"));
         });
     }
 
     state = {
         startDate: new Date(),
     };
+
+    goBack(){
+        this.props.history.goBack();
+    }
     
     handleChange = (startDate) => {
         this.setState({
@@ -31,7 +37,7 @@ class RestaurantReservations extends Component {
     render(){
     return (
         <div>
-            
+            <button onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.name}</div>
             <br></br>
             {
@@ -48,6 +54,7 @@ class RestaurantReservations extends Component {
                                 <div className="TokenPax">PAX: {req.token.pax}</div>
                                 </div>
                                 <div className="TokenRequestState">{req.token.accepted ? "APPROVED":""}</div> 
+                                <button className="ConfirmVisit" onClick={()=>this.props.dispatch(confirmVisit(req.hash, req.token.ownerAddress))}> Confirm Visit</button>
                             </div>
                             }
                             return null;
@@ -67,8 +74,8 @@ class RestaurantReservations extends Component {
 const mapStateToProps = (state) => {
     
     return{
-        name: state.getUserDataReducer.displayName,
-        UID:state.getUserDataReducer.uid,
+        name: state.getUserDataReducer.user.displayName,
+        UID:state.getUserDataReducer.user.uid,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
         slots:state.getSlotsReducer.slots,

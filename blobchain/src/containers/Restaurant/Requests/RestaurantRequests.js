@@ -2,18 +2,23 @@ import './RestaurantRequests.css';
 import {withRouter} from 'react-router-dom';
 import { connect  } from 'react-redux';
 import { Component } from 'react';
-import { getRequests } from '../../../store/actions';
+import { approveApplication, getRequests, rejectApplication } from '../../../store/actions';
 class RestaurantRequests extends Component {
     
     constructor(props){
         super(props);
+        this.goBack = this.goBack.bind(this); 
         this.props.dispatch(getRequests(props.UID,props.type));
     }
 
     state = {
         startDate: new Date(),
     };
-    
+
+    goBack(){
+        this.props.history.goBack();
+    }
+
     handleChange = (startDate) => {
         this.setState({
           startDate,
@@ -28,6 +33,7 @@ class RestaurantRequests extends Component {
     render(){
     return (
         <div>
+            <button onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.name}</div>
             <br></br>
             {
@@ -36,6 +42,9 @@ class RestaurantRequests extends Component {
                         return (this.props.requests[date].map((req,i)=>{
                             if(!req.token.isAccepted){
                                 return <div className="Token" key={i}>
+                                <div className="restaurantName">{req.user.userName}</div>
+                                <div className="restaurantName">{req.user.outstandingReservations}</div>
+                                <div className="restaurantName">{req.user.totalReservations}</div>
                                 <div className="restaurantName">{req.token.restaurantName}</div>
                                 <div className="restaurantAddress">{req.token.restaurantAddress}</div>
                                 <div className="TokenDateTime">{this.dateConverter(req.token.dateTime)}</div>
@@ -44,9 +53,10 @@ class RestaurantRequests extends Component {
                                 <div className="TokenPax">PAX: {req.token.pax}</div>
                                 </div>
                                 <div className="TokenRequestState">{req.token.isAccepted ? "APPROVED": <div>
-                                    <button className="buttonApprove">APPROVE</button>
-                                    <button className="buttonReject">REJECT</button>
+                                    <button className="buttonApprove" onClick={()=>{this.props.dispatch(approveApplication(req))}}>APPROVE</button>
+                                    <button className="buttonReject" onClick={()=>{this.props.dispatch(rejectApplication(req))}}>REJECT</button>
                                     </div>}</div> 
+                                
                             </div>
                             }
                             return null;
@@ -66,8 +76,8 @@ class RestaurantRequests extends Component {
 const mapStateToProps = (state) => {
     
     return{
-        name: state.getUserDataReducer.displayName,
-        UID:state.getUserDataReducer.uid,
+        name: state.getUserDataReducer.user.displayName,
+        UID:state.getUserDataReducer.user.uid,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
         requests:state.getRequestsReducer.requests,

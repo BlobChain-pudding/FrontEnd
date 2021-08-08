@@ -7,7 +7,7 @@ function getUserDataReducer(state={}, action){
         case (type.AUTH_SIGN_IN_USER):
             return({
                 ...action.payload,
-                type: "client",
+                type: "user",
                 success: true,
             })
         case (type.AUTH_SIGN_IN_RESTAURANT):
@@ -21,6 +21,23 @@ function getUserDataReducer(state={}, action){
                 ...state,
                 success: false,
             })
+        case (type.AUTH_SIGNUP_USER_SUCCESS):
+            return({
+                ...action.payload,
+                type: "user",
+                success: true,
+            })
+        case (type.AUTH_SIGNUP_RESTAURANT_SUCCESS):
+            return({
+                ...action.payload,
+                type: "restaurant",
+                success: true,
+            })
+        case (type.AUTH_SIGNUP_ERROR):
+            return({
+                ...state,
+                success: false,
+            })
         default:
             return({
                 ...state,
@@ -28,6 +45,8 @@ function getUserDataReducer(state={}, action){
             })
     }   
 }
+
+
 
 function getRestaurantsReducer(state = [], action) {
     switch(action.type){
@@ -131,6 +150,45 @@ function getRequestsReducer(state = {}, action) {
     }   
 }
 
+function createTokenReducer(state = {}, action) {
+    switch(action.type){
+        case (type.CREATE_TOKEN_SUCCESS):
+            return({
+                ...action.payload,
+                success: true,
+            })
+        case (type.CREATE_TOKEN_ERROR):
+            return({
+                ...state,
+                success: false,
+            })
+        default:
+            return({
+                ...state,
+                success: false,
+            })
+    }   
+}
+
+function confirmVisitReducer(state = {}, action) {
+    switch(action.type){
+        case (type.CONFIRM_VISIT_SUCCESS):
+            return({
+                ...action.payload,
+                success: true,
+            })
+        case (type.CONFIRM_VISIT_ERROR):
+            return({
+                ...state,
+                success: false,
+            })
+        default:
+            return({
+                ...state,
+                success: false,
+            })
+    }   
+}
 
 export const rootReducer = combineReducers({
     getUserDataReducer,
@@ -139,5 +197,7 @@ export const rootReducer = combineReducers({
     getSlotsReducer,
     getReviewsReducer,
     getRequestsReducer,
+    createTokenReducer,
+    confirmVisitReducer,
     firebaseReducer,
 });

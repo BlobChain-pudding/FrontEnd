@@ -1,5 +1,5 @@
-import { CREATE_TOKEN_SUCCESS, CREATE_TOKEN_ERROR} from '../types';
-import CreateTokens from './../../containers/Restaurant/CreateTokens/CreateTokens';
+import { apiConfirmVisit, apiAccRequest, apiCreateSlot, apiRejRequest } from '../../modules/api';
+import { CREATE_TOKEN_ERROR, CREATE_TOKEN_SUCCESS, APPROVE_TOKEN_SUCCESS, APPROVE_TOKEN_ERROR, REJECT_TOKEN_SUCCESS, REJECT_TOKEN_ERROR, CONFIRM_VISIT_ERROR, CONFIRM_VISIT_SUCCESS } from './../types';
 // export const POST_APPLY_TOKEN = 'APPLY_TOKEN'
 // export const GET_RESERVATIONS = 'GET_RESERVATIONS';
 // export const POST_REVIEW = 'POST_REVIEW';
@@ -7,12 +7,69 @@ import CreateTokens from './../../containers/Restaurant/CreateTokens/CreateToken
 // export const GET_USER_HISTORY = 'GET_USER_HISTORY';
 
 export const postCreateTokens = (unixTime, tableNum, pax) => async dispatch => {
-    dispatch({
-        type: CREATE_TOKEN_SUCCESS,
-        payload: 
-        {
-            success: true,  
-        }
-    });
+    console.log(unixTime, parseInt(tableNum), parseInt(pax))
+    try{
+        const slot = await apiCreateSlot(unixTime, parseInt(tableNum), parseInt(pax));
+        dispatch({
+            type: CREATE_TOKEN_SUCCESS,
+            payload:{
+                slot: slot,
+            }
+        });
+    }catch(err){
+        dispatch({
+            type: CREATE_TOKEN_ERROR,
+        });
+    }
 
+}
+
+export const confirmVisit = (slotHash, userAddr) => async dispatch => {
+    console.log(slotHash, userAddr);
+    try{
+        const acc = await apiConfirmVisit(slotHash, userAddr);
+        dispatch({
+            type: CONFIRM_VISIT_SUCCESS,
+            payload:{
+                res: acc,
+            }
+        });
+    }catch(err){
+        dispatch({
+             type: CONFIRM_VISIT_ERROR,
+        });
+    }
+}
+
+export const approveApplication = (request) => async dispatch => {
+   try{
+        const acc = await apiAccRequest(request);
+        dispatch({
+            type: APPROVE_TOKEN_SUCCESS,
+            payload:{
+                res: acc,
+            }
+        });
+    }catch(err){
+        dispatch({
+             type: APPROVE_TOKEN_ERROR,
+        });
+    }
+}
+
+
+export const rejectApplication = (request) => async dispatch => {
+    try{
+        const acc = await apiRejRequest(request);
+        dispatch({
+            type: REJECT_TOKEN_SUCCESS,
+            payload:{
+                res: acc,
+            }
+        });
+    }catch(err){
+        dispatch({
+            type: REJECT_TOKEN_ERROR,
+        });
+    }
 }

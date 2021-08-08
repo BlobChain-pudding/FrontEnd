@@ -2,19 +2,25 @@ import './SearchTokens.css';
 import {withRouter} from 'react-router-dom';
 import { connect  } from 'react-redux';
 import { Component } from 'react';
-import { getSlots } from '../../../store/actions';
+import { getSlots, makeRequest } from '../../../store/actions';
 import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 class SearchTokens extends Component {
     
     constructor(props){
         super(props);
-        this.props.dispatch(getSlots(props.match.params.addr,false));
+        this.props.dispatch(getSlots(props.match.params.addr,"unaccepted"));
+        this.goBack = this.goBack.bind(this);
     }
 
     state = {
         startDate: new Date(),
     };
+
+    goBack(){
+        this.props.history.goBack();
+    }
+    
     
     handleChange = (startDate) => {
         this.setState({
@@ -37,6 +43,7 @@ class SearchTokens extends Component {
     const { startDate } = this.state;
     return (
         <div>
+            <button onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.match.params.name}</div>
             <div className="restaurantAddress">{this.props.match.params.addr}</div>
             <br></br>
@@ -61,7 +68,7 @@ class SearchTokens extends Component {
                                 <div className="TokenPax">PAX: {slot.token.pax}</div>
                                 <div className="TokenTableNo">Table {slot.token.tableNo}</div>
                                 </div>
-                                <button className="buttonApply">Apply</button>
+                                <button className="buttonApply" onClick={()=>{this.props.dispatch(makeRequest(slot.token.restaurantAddress, slot.hash))}}>Apply</button>
                             </div>
                         }))
                     }
