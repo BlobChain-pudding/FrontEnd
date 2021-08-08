@@ -136,10 +136,25 @@ import {
     }
     return reviews;
   };
+
+  const apiGetOwnReviews = async () => {
+    const currentAccount = await connectBlob();
+    const reviews = {};
+    const rawReviews = await getReviews(currentAccount);
+    for (const review of rawReviews) {
+      const slotDetails = await getSlotDetails(review[2]);
+      const date = new Date(Number.parseInt(slotDetails.dateTime));
+      const dateString = date.toDateString();
+      if (!reviews[dateString]) reviews[dateString] = [];
+      review["token"] = slotDetails;
+      reviews[dateString].push(review);
+    }
+    return reviews;
+  };
   
   export {
     apiNewUser,
-    // apiExistingUser,
+    apiGetOwnReviews,
     apiGetRestaurants,
     apiCreateSlot,
     apiGetSlots,

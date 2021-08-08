@@ -43,8 +43,8 @@ class RestaurantRequests extends Component {
                             if(!req.token.isAccepted){
                                 return <div className="Token" key={i}>
                                 <div className="restaurantName">{req.user.userName}</div>
-                                <div className="restaurantName">{req.user.outstandingReservations}</div>
-                                <div className="restaurantName">{req.user.totalReservations}</div>
+                                <div className="restaurantText">Outstanding:{req.user.outstandingReservations}</div>
+                                <div className="restaurantText">Total: {req.user.totalReservations}</div>
                                 <div className="restaurantName">{req.token.restaurantName}</div>
                                 <div className="restaurantAddress">{req.token.restaurantAddress}</div>
                                 <div className="TokenDateTime">{this.dateConverter(req.token.dateTime)}</div>

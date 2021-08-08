@@ -28,6 +28,7 @@ function App() {
           <Route path="/user/search/:name/:addr" component={SearchTokens}></Route>
           <Route path="/user/requests/:name" component={Requests}></Route>
           <Route path="/user/reservations/:name" component={Reservations}></Route>
+          <Route path="/restaurant/reviews/:name" component={Reviews}></Route>
           <Route path="/restaurant/reviews/:name/:addr" component={Reviews}></Route>
           <Route path="/restaurant/requests/:name" component={RestaurantRequests}></Route>
           <Route path="/restaurant/reservations/:name" component={RestaurantReservations}></Route>

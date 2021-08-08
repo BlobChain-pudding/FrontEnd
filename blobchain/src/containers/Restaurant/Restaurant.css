@@ -1,0 +1,10 @@
+.buttonMyReviews{
+    margin: 1vh 0;
+    padding:1vh 2vh;
+    font-size: 2.5vh;
+    border-radius: 2vh;
+    border: 0.5vh solid black;
+    background-color: #ffffff;
+    color:#2F2F2F;  
+    font-family: "MADETOMMY";
+}

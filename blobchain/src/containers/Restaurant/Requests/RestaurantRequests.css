@@ -6,6 +6,11 @@
     font-size: 1vh;
     font-family: "MADETOMMY";
 }
+.restaurantText{
+    font-size: 1.3vh;
+    color: #BA3D3C;
+    font-family: "MADETOMMYBOLD";
+}
 .TokenRequestState{
     display: flex;
     flex-direction: row;

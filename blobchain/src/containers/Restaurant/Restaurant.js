@@ -40,6 +40,11 @@ class Restaurant extends Component {
                          Check Reservations
                      </div>
                  </Link>
+                 <Link to={`/restaurant/reviews/${this.props.name}`}>
+                     <div className="buttonMyReviews">
+                         My Reviews
+                     </div>
+                 </Link>
                  <button className="buttonSignOut" onClick={this.goBack}>
                      SignOut
                  </button>

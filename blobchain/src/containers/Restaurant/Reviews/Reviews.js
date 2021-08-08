@@ -2,20 +2,25 @@ import './Reviews.css';
 import { withRouter } from 'react-router-dom';
 import { connect  } from 'react-redux';
 import { Component } from 'react';
-import { getReviews } from '../../../store/actions';
+import { getOwnReviews, getReviews } from '../../../store/actions';
 class Reviews extends Component {
     
     constructor(props){
         super(props);
         console.log(props.match.params.addr);
-        this.props.dispatch(getReviews(props.match.params.addr,false));
+        if(props.type==="user"){
+            this.props.dispatch(getReviews(props.match.params.addr,false));
+        }else if(props.type==="restaurant"){
+            this.props.dispatch(getOwnReviews());
+        }
+        
     }
 
     render(){
     return (
         <div>
             <div className="restaurantName">{this.props.match.params.name}</div>
-            <div className="restaurantAddress">{this.props.match.params.addr}</div>
+            <div className="restaurantAddress">{this.props.type==="user" ? this.props.match.params.addr:null}</div>
             <br></br>
             <div className="DateLists">
              
