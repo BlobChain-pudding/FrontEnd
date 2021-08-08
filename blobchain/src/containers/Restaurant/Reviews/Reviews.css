@@ -1,0 +1,52 @@
+.DatesList{
+    margin: 1vh 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto; 
+    width: 100%;
+}
+.restaurantName{
+    font-size: 2vh;
+    font-family: "MADETOMMYBOLD";
+}
+.restaurantAddress{
+    font-size: 1vh;
+    font-family: "MADETOMMY";
+}
+
+.ReviewsList{
+    margin: 1vh 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto; 
+    background-color: white;
+    border-radius: 1vh;
+    box-shadow: 0vh 1vh 1vh #2F2F2F;
+    border-radius: 1vh;
+    padding: 1vh 2vh;
+    
+}
+
+.ReviewDate{
+    font-size: 1.5vh;
+    font-family: "MADETOMMYBOLD";
+}
+
+.reviewer{
+    font-size: 1.2vh;
+    font-family: "MADETOMMYBOLD";
+}
+
+.singleReview{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 1vh;
+  font-family: "MADETOMMY";
+  padding: 1vh 0vh;
+}

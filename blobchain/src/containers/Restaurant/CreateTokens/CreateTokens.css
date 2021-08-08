@@ -1,0 +1,21 @@
+input[type="number"]{
+    padding: 1.5vh;
+    background-color: #ffffff ;
+    margin: 1vh 0vh; 
+    border-radius: 1.5vh;
+    border: 0px;
+    width: 100%;
+    box-shadow: inset 0px 2px 5px #DDDDDD;
+    font-family: "MADETOMMY";
+}
+
+.buttonCreateToken{
+    margin: 1vh 0;
+    font-size: 2vh;
+    width: 100%;
+    font-family: "MADETOMMYBOLD";
+    background-color: #2D2D2D;
+    color:white;
+    padding: 0.5vh 1vh;
+    border-radius: 1vh;
+}

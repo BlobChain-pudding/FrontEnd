@@ -28,14 +28,19 @@ class SearchTokens extends Component {
     
         return currentDate.getTime() < selectedDate.getTime();
     }
+    dateConverter = (UNIX_timestamp) => {
+        var unixDate = new Date(parseInt(UNIX_timestamp,10));
+        return unixDate.toLocaleString('en-SG', {timeZone: 'Asia/Singapore',year: 'numeric', month: 'long', day: 'numeric', hour:"2-digit", minute:"numeric", hour12: true });    
+     }
+
     render(){
     const { startDate } = this.state;
     return (
         <div>
-            <div>{this.props.match.params.name}</div>
+            <div className="restaurantName">{this.props.match.params.name}</div>
+            <div className="restaurantAddress">{this.props.match.params.addr}</div>
             <br></br>
-            <div>{this.props.match.params.addr}</div>
-            <br></br>
+            <div className="chooseDateTitle">Choose Date:</div>
             <ReactDatePicker
             selected={startDate}
             onChange={this.handleChange}
@@ -48,8 +53,15 @@ class SearchTokens extends Component {
                 this.props.slots ? (Object.keys(this.props.slots).map((date)=>{
                     if(this.state.startDate.toDateString() === date){
                         return (this.props.slots[date].map((slot,i)=>{
-                            return <div key={i}>{slot.token.dateTime}
-                                <button>Apply</button>
+                            return <div className="Token" key={i}>
+                                <div className="restaurantName">{slot.token.restaurantName}</div>
+                                <div className="restaurantAddress">{slot.token.restaurantAddress}</div>
+                                <div className="TokenDateTime">{this.dateConverter(slot.token.dateTime)}</div>
+                                <div className="TokenDesc">
+                                <div className="TokenPax">PAX: {slot.token.pax}</div>
+                                <div className="TokenTableNo">Table {slot.token.tableNo}</div>
+                                </div>
+                                <button className="buttonApply">Apply</button>
                             </div>
                         }))
                     }
@@ -64,13 +76,14 @@ class SearchTokens extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    
     return{
         name: state.getUserDataReducer.name,
         pubAddr: state.getUserDataReducer.pubAddr,
+        UID: state.getUserDataReducer.UID,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
-        slots:state.getSlotsReducer,
+        slots:state.getSlotsReducer.slots,
     }
 }
 

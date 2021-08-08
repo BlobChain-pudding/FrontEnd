@@ -1,8 +1,5 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +7,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: "MADETOMMY";
+  src: url("./assets/fonts//MADE TOMMY Regular_PERSONAL USE.otf");
+       
+}
+
+@font-face {
+  font-family: "MADETOMMYBOLD";
+  src: url("./assets/fonts//MADE TOMMY Bold_PERSONAL USE.otf");
+       
+}
+
+@font-face {
+  font-family: "MADETOMMYMEDIUM";
+  src: url("./assets/fonts//MADE TOMMY Medium_PERSONAL USE.otf");
+       
 }

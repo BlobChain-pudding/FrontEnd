@@ -1,0 +1,61 @@
+.restaurantName{
+    font-size: 2vh;
+    font-family: "MADETOMMYBOLD";
+}
+.restaurantAddress{
+    font-size: 1vh;
+    font-family: "MADETOMMY";
+}
+.chooseDateTitle{
+    font-size: 1.3vh;
+    font-family: "MADETOMMY";
+}
+.Token{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  box-shadow: 0vh 1vh 1vh #2F2F2F;
+  border-radius: 1vh;
+  padding: 1vh 2vh;
+  width: 100%;
+}
+.TokenDateTime{
+    font-size: 2vh;
+    font-family: "MADETOMMYMEDIUM";
+}
+.TokenPax{
+    margin:0.5vh 1vh;
+    font-size: 2vh;
+    padding: 0.2vh 0.4vh;
+    border: 0.5vh solid black;
+    border-radius: 1vh;
+    font-family: "MADETOMMYMEDIUM";
+}
+.TokenTableNo{
+    margin:0.5vh 0vh;
+    font-size: 2vh;
+    color:#BA3D3C;
+    padding: 0.2vh 0.4vh;
+    border: 0.5vh solid #BA3D3C;
+    border-radius: 1vh;
+    font-family: "MADETOMMYMEDIUM";
+}
+.TokenDesc{
+  width:100%;
+  margin:0.5vh 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.buttonApply{
+    font-size: 2vh;
+    width: 100%;
+    font-family: "MADETOMMYBOLD";
+    background-color: #2D2D2D;
+    color:white;
+    padding: 0.5vh 1vh;
+    border-radius: 1vh;
+}

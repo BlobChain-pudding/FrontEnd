@@ -1,0 +1,41 @@
+.nameText{
+    font-size: 2.5vh;
+    padding: 1vh;
+    font-family: "MADETOMMYBOLD";
+}
+.buttonSearch{
+    padding:1vh 2vh;
+    font-size: 2.5vh;
+    border-radius: 2vh;
+    background-color: #6A957B;
+    color:#ffffff;
+    font-family: "MADETOMMY";
+}
+.buttonMyReserve{
+    padding:1vh 2vh;
+    font-size: 2.5vh;
+    border-radius: 2vh;
+    background-color: #EE803E;
+    color:#ffffff; 
+    font-family: "MADETOMMY"; 
+}
+.buttonMyRequests{
+    padding:1vh 2vh;
+    font-size: 2.5vh;
+    border-radius: 2vh;
+    background-color: #BA3D3C;
+    color:#ffffff;  
+    font-family: "MADETOMMY";
+}
+.buttonSignOut{
+    margin: 1vh 0;
+    padding: 1vh 2vh;
+    width: 100%;
+    background-color: #2F2D2F;
+    border-radius: 1.5vh;
+    border: none;
+    color:#ffffff;
+    font-family: "MADETOMMY";
+}
+
+    

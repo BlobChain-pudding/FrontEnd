@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import * as type from './types';
+import { firebaseReducer } from "react-redux-firebase";
 
 function getUserDataReducer(state={}, action){
     switch(action.type){
-        case (type.AUTH_SIGN_IN_CLIENT):
+        case (type.AUTH_SIGN_IN_USER):
             return({
                 ...action.payload,
                 type: "client",
@@ -138,4 +139,5 @@ export const rootReducer = combineReducers({
     getSlotsReducer,
     getReviewsReducer,
     getRequestsReducer,
+    firebaseReducer,
 });

@@ -1,97 +1,72 @@
-import { GET_SLOTS_SUCCESS, GET_REQUESTS_SUCCESS, AUTH_SIGN_IN_CLIENT } from './../types';
-
-export const signinClient = () => async dispatch => {
+import { GET_SLOTS_SUCCESS, GET_REQUESTS_SUCCESS, AUTH_SIGN_IN_USER, AUTH_SIGN_IN_RESTAURANT, AUTH_SIGN_IN_ERROR, AUTH_SIGNUP_ERROR, GET_SLOTS_ERROR, GET_REQUESTS_ERROR } from './../types';
+import firebase from '../../firebase';
+import { apiGetRequests, apiGetSlots } from '../../modules/api';
+export const signin = (email, password, type, callback) => async dispatch => {
+  try{
+      firebase.auth().signInWithEmailAndPassword(email, password).then(
+      data => {
+      console.log(type);
+      if(type==="user"){
+        dispatch({
+          type: AUTH_SIGN_IN_USER,
+            payload: {
+                displayName: data.user.displayName,
+                type: type,
+            }
+        });
+       callback(type);
+      }else if(type==="restaurant"){
+        dispatch({
+          type: AUTH_SIGN_IN_RESTAURANT,
+            payload: {
+                 displayName: data.user.displayName,
+                 type: type,
+            }
+        });
+        callback(type);
+      }
+    
+  });
+  }catch(err){
     dispatch({
-        type: AUTH_SIGN_IN_CLIENT,
-        payload: {
-            name:"Caleb Foo",
-            pubAddr: "0123242349820394",
-        }
-    })
+      type: AUTH_SIGN_IN_ERROR,
+    }) 
+  };
+}
+
+export const signUp = (email, password, type) => async dispatch =>{
 
 }
 
 
 export const getSlots = (restaurantAddr, isAccepted) => async dispatch =>{
-    dispatch({
+    try{
+      const slots = await apiGetSlots(restaurantAddr, isAccepted);
+      dispatch({
         type: GET_SLOTS_SUCCESS,
-        payload: 
-        {
-            "Tue Aug 03 2021": [
-              {
-                "token": {
-                  "0": "My Restaurant",
-                  "1": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "2": "1627931326667",
-                  "3": "1",
-                  "4": "4",
-                  "5": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "6": false,
-                  "7": false,
-                  "8": true,
-                  "restaurantName": "My Restaurant",
-                  "restaurantAddress": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "dateTime": "1627931326667",
-                  "tableNo": "1",
-                  "pax": "4",
-                  "ownerAddress": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "visited": false,
-                  "accepted": false,
-                  "exist": true
-                },
-                "hash": "0x8bf8a434bae025a8c8e73fd0e80c6d1bb24f423c6cee7765d340ce8ac4dc0efd"
-              }
-            ]
-          }
-    })
+        payload: {
+          slots: slots
+        }     
+    });
+    }catch(err){
+      dispatch({
+        type: GET_SLOTS_ERROR,
+      }) 
+    }
+    
 }
-
 export const getRequests = (uid, type) => async dispatch => {
+  try{
+    const requests = await apiGetRequests(uid, type);
     dispatch({
-        type: GET_REQUESTS_SUCCESS,
-        payload:
-        {
-            "Tue Aug 03 2021": [
-              {
-                "userUID": "DIgBr8q6oANza4fByt1WLKpbSKH3",
-                "slotHash": "0x7238cde176e78a69087b940edc0f69fceedc17f90716461a6cbc5991691fde01",
-                "resUID": "x8l8tLYNTCNJ03PqQKgBVF2utH53",
-                "address": "0xc12cc487ab3bdf25bf19f72397d240e60cd67f38",
-                "docID": "9MIF9rzLySKjzADiJ0EN",
-                "token": {
-                  "0": "My Restaurant",
-                  "1": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "2": "1627966538191",
-                  "3": "1",
-                  "4": "4",
-                  "5": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "6": false,
-                  "7": false,
-                  "8": true,
-                  "restaurantName": "My Restaurant",
-                  "restaurantAddress": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "dateTime": "1627966538191",
-                  "tableNo": "1",
-                  "pax": "4",
-                  "ownerAddress": "0xDBfDa8454b62FB973B837168A93316093347f437",
-                  "visited": false,
-                  "accepted": false,
-                  "exist": true
-                },
-                "user": {
-                  "0": "EYLeong",
-                  "1": "0xc12CC487AB3Bdf25bf19F72397D240e60cD67f38",
-                  "2": "0",
-                  "3": "2",
-                  "4": true,
-                  "userName": "EYLeong",
-                  "userAddress": "0xc12CC487AB3Bdf25bf19F72397D240e60cD67f38",
-                  "outstandingReservations": "0",
-                  "totalReservations": "2",
-                  "exist": true
-                }
-              }
-            ]
-          }
-    })
+      type: GET_REQUESTS_SUCCESS,
+      payload: {
+        requests: requests
+      }     
+  });
+  }catch(err){
+    dispatch({
+      type: GET_REQUESTS_ERROR,
+    }) 
+  }
 }

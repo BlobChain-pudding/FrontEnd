@@ -1,18 +1,33 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { rootReducer } from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {loadState, saveState} from './sessionStorage';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { createStore, applyMiddleware, compose } from "redux";
+import reduxThunk from "redux-thunk";
+// ENHANCING STORE WITH FIREBASE
+import firebase from "../firebase";
+import { reactReduxFirebase } from 'react-redux-firebase';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
+const persistConfig = {
+  key: 'root',
+  storage,
+  stateReconciler: hardSet,
+}
 
-const persistedState = loadState();
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const mainstore = createStore(
-    rootReducer,
-    persistedState,  
-    composeWithDevTools(applyMiddleware(thunk))
+const createStoreWithFirebase = compose(reactReduxFirebase(firebase))(
+  createStore
 );
-export default mainstore;
 
-mainstore.subscribe(() => {
-  saveState( mainstore.getState() );
-});
+
+
+const mainstore = createStoreWithFirebase(
+    persistedReducer,
+    {},  
+    composeWithDevTools(applyMiddleware(reduxThunk))
+);
+
+const persistor = persistStore(mainstore);
+
+export {mainstore , persistor};

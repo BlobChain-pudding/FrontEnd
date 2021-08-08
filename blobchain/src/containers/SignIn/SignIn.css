@@ -1,0 +1,45 @@
+.TitleCard{
+    font-size: 2.5vh;
+    padding: 1vh 0 ;
+    font-family: "MADETOMMYBOLD";
+}
+
+.SubtitleCard{
+    font-size: 2vh;
+    padding: 1vh 0 ;
+    font-family: "MADETOMMYBOLD";
+}
+
+input[type="password"], input[type="email"]{
+    padding: 1.5vh;
+    background-color: #ffffff ;
+    margin: 1vh 0vh; 
+    width:100%;
+    border-radius: 1.5vh;
+    border: 0px;
+    box-shadow: inset 0px 2px 5px #DDDDDD;
+    font-family: "MADETOMMY";
+}   
+
+.buttonSignIn{
+    margin: 1vh 0 ;
+    padding: 1vh;
+    width: 100%;
+    background-color: #2F2D2F;
+    border-radius: 1.5vh;
+    border: none;
+    color:#ffffff;
+    font-family: "MADETOMMY";
+}
+
+.accType{
+    padding: 1.5vh;
+    width: 100%;
+    font-family: "MADETOMMY";
+    border-radius: 1.5vh;
+    margin: 1vh 0vh; 
+    
+}
+.accType:active{
+    outline: 0;
+}

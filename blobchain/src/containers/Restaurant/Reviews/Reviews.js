@@ -1,32 +1,33 @@
 import './Reviews.css';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect  } from 'react-redux';
 import { Component } from 'react';
-import "react-datepicker/dist/react-datepicker.css";
 import { getReviews } from '../../../store/actions';
 class Reviews extends Component {
     
     constructor(props){
         super(props);
+        console.log(props.match.params.addr);
         this.props.dispatch(getReviews(props.match.params.addr,false));
     }
 
     render(){
     return (
         <div>
-            <div>{this.props.match.params.name}</div>
+            <div className="restaurantName">{this.props.match.params.name}</div>
+            <div className="restaurantAddress">{this.props.match.params.addr}</div>
             <br></br>
-            <div>{this.props.match.params.addr}</div>
-            <br></br>
-            
+            <div className="DateLists">
+             
             {
                 this.props.reviews ? (Object.keys(this.props.reviews).map((date)=>{
                     if(date!=="success"){
-                        return <div>
-                            {date}
-                            <br></br>
+                        return <div className="ReviewsList">
+                            <div className="ReviewDate">{date}</div>
                             {(this.props.reviews[date].map((review,i)=>{
-                            return <div key={i}>{review[0]}
+                            return <div key={i} className="singleReview">
+                                <div className="reviewer">{review[1]}</div>
+                                <div className="review">{review[0]}</div>
                                 </div>
                         }))}</div>
                     }
@@ -34,6 +35,8 @@ class Reviews extends Component {
                     
                 })) : null 
             }
+               
+            </div>
         </div>
       );
 }
@@ -42,13 +45,12 @@ class Reviews extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    
     return{
-        name: state.getUserDataReducer.name,
-        pubAddr: state.getUserDataReducer.pubAddr,
+        name: state.getUserDataReducer.displayName,
         success:state.getUserDataReducer.success,
         type:state.getUserDataReducer.type,
-        reviews:state.getReviewsReducer,
+        reviews:state.getReviewsReducer.reviews,
     }
 }
 
