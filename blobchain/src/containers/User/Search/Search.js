@@ -40,7 +40,7 @@ class Search extends Component {
                         <div className="restaurantName">{res.name}</div>
                         <div className="restaurantAddress">{res.address}</div>
                     </div> 
-                    <button className="reviewButton" onClick={()=>{this.props.history.push(`/restaurant/reviews/${res.name}/${res.address}`)}}>Reviews</button>
+                    <button className="reviewButton" onClick={()=>{this.props.history.push(`/restaurant/review/${res.name}/${res.address}`)}}>Reviews</button>
                     </div></div>
                 }
                 return null;

@@ -9,7 +9,7 @@ class Reviews extends Component {
         super(props);
         console.log(props.match.params.addr);
         if(props.type==="user"){
-            this.props.dispatch(getReviews(props.match.params.addr,false));
+            this.props.dispatch(getReviews(props.match.params.addr));
         }else if(props.type==="restaurant"){
             this.props.dispatch(getOwnReviews());
         }

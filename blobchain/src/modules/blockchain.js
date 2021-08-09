@@ -6,7 +6,7 @@ const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 
 const contract = new web3.eth.Contract(
   contractAbi,
-  "0xD2204B472EfbBf15097E01E2E905606C547A57E6"
+  "0x0B12290dEfF505D8a543E2E83D66F82AfDBE7617"
 );
 contract.defaultChain = "rinkeby";
 

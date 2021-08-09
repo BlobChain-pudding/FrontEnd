@@ -11,7 +11,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use(express.static("static"));
 
 app.post("/token", h.tokenHandler);
 
