@@ -69,6 +69,7 @@ export const signUp = (email, password, name, type, callback) => async dispatch 
 
 
 export const getSlots = (restaurantAddr, isAccepted) => async dispatch =>{
+    console.log(restaurantAddr);
     try{
       const slots = await apiGetSlots(restaurantAddr, isAccepted);
       dispatch({

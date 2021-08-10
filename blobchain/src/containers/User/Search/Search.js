@@ -29,7 +29,7 @@ class Search extends Component {
         <div>
             
             <div>
-            <button onClick={this.goBack}>Go Back</button>
+            <button className="buttonCreateToken" onClick={this.goBack}>Go Back</button>
             <input placeholder="Restaurant Search" value={this.state.restaurantSearch} type="text" onChange={(e)=>this.onSearchValueChange(e)}></input>
             <div className="RestaurantList">
             {this.props.restaurants ? this.props.restaurants.map((res)=>{

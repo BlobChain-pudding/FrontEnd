@@ -2,13 +2,13 @@ import { contractAbi } from "./abis";
 import Web3 from 'web3';
 const ethereum  = window.ethereum;
 
-const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+const web3 = new Web3(Web3.givenProvider || "ws://127.0.0.1:7545");
 
 const contract = new web3.eth.Contract(
   contractAbi,
-  "0x0B12290dEfF505D8a543E2E83D66F82AfDBE7617"
+  "0xf19397eA744a5515667AfEdceF9f85B784e14595"
 );
-contract.defaultChain = "rinkeby";
+contract.defaultChain = "Ganache";
 
 /*****************************************/
 /* Detect the MetaMask Ethereum provider */

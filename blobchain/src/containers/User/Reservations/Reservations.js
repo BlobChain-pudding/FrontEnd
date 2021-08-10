@@ -65,7 +65,7 @@ class Reservations extends Component {
     render(){
     return (
         <div>
-            <button onClick={this.goBack}>Go Back</button>
+            <button className="buttonCreateToken" onClick={this.goBack}>Go Back</button>
             <Modal
                 isOpen={this.state.reviewModal}
                 onRequestClose={this.toggleModal}

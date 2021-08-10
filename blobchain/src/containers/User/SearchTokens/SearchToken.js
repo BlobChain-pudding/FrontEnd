@@ -43,7 +43,7 @@ class SearchTokens extends Component {
     const { startDate } = this.state;
     return (
         <div>
-            <button onClick={this.goBack}>Go Back</button>
+            <button className="buttonCreateToken" onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.match.params.name}</div>
             <div className="restaurantAddress">{this.props.match.params.addr}</div>
             <br></br>

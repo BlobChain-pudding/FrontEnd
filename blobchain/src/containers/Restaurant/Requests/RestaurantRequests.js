@@ -33,7 +33,7 @@ class RestaurantRequests extends Component {
     render(){
     return (
         <div>
-            <button onClick={this.goBack}>Go Back</button>
+            <button className="buttonCreateToken" onClick={this.goBack}>Go Back</button>
             <div className="restaurantName">{this.props.name}</div>
             <br></br>
             {
